@@ -8,6 +8,11 @@ namespace ttyd::sac_bakugame {
 
 extern "C" {
 
+EVT_DECLARE(marioAttackEvent_BakuGame)
+EVT_DECLARE(hitCheck_MarioTeam)
+EVT_DECLARE(hitCheck_EnemyTeam)
+EVT_DECLARE(hitCheck_AudienceTeam)
+
 // bakuGameDispStar
 // bakuGameDisp3D
 // bakuGameDisp2D

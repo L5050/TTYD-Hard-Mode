@@ -3656,6 +3656,8 @@
 
 // sac_bakugame.o
 8022f990:bakuGameDecideWeapon
+803b3e20:marioAttackEvent_BakuGame
+803b3ffc:hitCheck_MarioTeam
 
 // sac_zubastar.o
 // .text

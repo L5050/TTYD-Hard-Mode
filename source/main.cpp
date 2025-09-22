@@ -54,7 +54,7 @@ static uint32_t initMod()
 {
 
     gc::os::OSReport("The Rel Loader has loaded!\n");
-    mod_main();
+    mod::mod_main();
 
     // If this function was hooked at the address where `v1` or `v2` would normally run, then the original instruction at that
     // address set `r3` to `0`. This functionality can be restored by simply having this function return 0.
