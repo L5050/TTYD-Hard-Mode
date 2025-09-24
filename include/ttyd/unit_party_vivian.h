@@ -1,6 +1,8 @@
 #pragma once
 
 #include "battle_database_common.h"
+#include "evt_cmd.h"
+#include "evtmgr.h"
 
 #include <cstdint>
 
@@ -37,15 +39,17 @@ extern battle_database_common::BattleUnitKind unitdata_Party_Vivian;
 // battle_entry_event
 // init_event
 // damage_event
-// vivian_hide_event
+EVT_DECLARE(vivian_hide_event)
 // attack_event
 // wait_event
 extern battle_database_common::BattleWeapon partyWeapon_VivianNormalAttack;
 extern battle_database_common::BattleWeapon partyWeapon_VivianShadowGuard;
 extern battle_database_common::BattleWeapon partyWeapon_VivianMagicalPowder;
 extern battle_database_common::BattleWeapon partyWeapon_VivianCharmKissAttack;
-// partyVivianAttack_NormalAttack
-// partyVivianAttack_ShadowGuard
+
+EVT_DECLARE(partyVivianAttack_NormalAttack)
+EVT_DECLARE(partyVivianAttack_ShadowGuard)
+
 // partyVivianAttack_MagicalPowder
 // partyVivianAttack_CharmKissAttack
 extern int32_t vivian_shadow_tail_event[1];

@@ -13,6 +13,7 @@
 #include "ttyd/battle_damage.h"
 #include "ttyd/battle_unit.h"
 #include "ttyd/battle_database_common.h"
+#include "ttyd/unit_party_vivian.h"
 #include "gc/OSArena.h"
 #include "gc/os.h"
 #include <gc/types.h>
@@ -53,19 +54,26 @@ ttyd::battle_unit::BattleWorkUnit* BtlUnit_Entry_new(ttyd::battle_database_commo
 
 ttyd::evtmgr::EvtEntry *evtEntry_new(void *evtCode, int32_t executionOrder, uint32_t flags)
 {
-  gc::os::OSReport("%p address\n", evtCode);
-    if (evtCode == ttyd::battle_mario::marioAttackEvent_NormalHammer_Core) {
-    return evtEntry_tramp((void *)override_hammer_evt, executionOrder, flags);
-  }
-  return evtEntry_tramp(evtCode, executionOrder, flags);
+    gc::os::OSReport("%p address\n", evtCode);
+    if (evtCode == ttyd::battle_mario::marioAttackEvent_NormalHammer_Core)
+    {
+        return evtEntry_tramp((void *)override_hammer_evt, executionOrder, flags);
+    }
+    if (evtCode == ttyd::unit_party_vivian::partyVivianAttack_ShadowGuard)
+    {
+        gc::os::OSReport("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
+        //evtEntry_tramp((void *)veil_buff, 1, 0);
+        return evtEntry_tramp(evtCode, executionOrder, flags);
+    }
+    return evtEntry_tramp(evtCode, executionOrder, flags);
 }
 
 void battleUnitGetStatusNew(ttyd::battle_unit::BattleWorkUnit* unit, int8_t status_type, int8_t* turns, int8_t* strength)
 {
   BtlUnit_GetStatus_tramp(unit, status_type, turns, strength);
-  if (status_type == 16 && *strength >= 10)
+  if (unit->alliance != 1 && status_type == 16 && *strength >= 5)
   {
-    *strength = 10;
+    *strength = 5;
   }
   return;
 }
@@ -77,7 +85,20 @@ int clock_out_hit_mario_func(ttyd::evtmgr::EvtEntry* entry, bool firstRun)
   return 2;
 }
 
+int vivian_buff(ttyd::evtmgr::EvtEntry* entry, bool firstRun)
+{
+  ttyd::battle_unit::BattleWorkUnit* unit = ttyd::battle::BattleGetPartyPtr(ttyd::battle::g_BattleWork);
+  unit->moves_remaining += 1;
+  return 2;
+}
+
 EVT_DECLARE_USER_FUNC(clock_out_hit_mario_func, 0)
+EVT_DECLARE_USER_FUNC(vivian_buff, 0)
+
+EVT_BEGIN(veil_buff)
+  USER_FUNC(vivian_buff)
+RETURN()
+EVT_END()
 
 EVT_BEGIN(clock_out_hit_mario_evt)
   USER_FUNC(clock_out_hit_mario_func)
@@ -92,6 +113,11 @@ ttyd::evtmgr::EvtEntry *evtEntryChild_new(ttyd::evtmgr::EvtEntry *parentEvt, voi
   }
     if (evtCode == ttyd::battle_mario::marioAttackEvent_NormalHammer_Core) {
     return evtEntryChild_tramp(parentEvt, (void *)override_hammer_evt, flags);
+  }
+    if (evtCode == ttyd::unit_party_vivian::partyVivianAttack_ShadowGuard) {
+      gc::os::OSReport("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
+      evtEntry_tramp((void *)veil_buff, 1, 0);
+    return evtEntryChild_tramp(parentEvt, (void *)evtCode, flags);
   }
   return evtEntryChild_tramp(parentEvt, evtCode, flags);
 }
@@ -110,10 +136,12 @@ void patchItems()
 {
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PEEKABOO].bp_cost = 0;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::POWER_RUSH].bp_cost = 3;
-  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::LAST_STAND].bp_cost = 2;
-  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PRETTY_LUCKY].bp_cost = 3;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::LAST_STAND].bp_cost = 20;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PRETTY_LUCKY].bp_cost = 30;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::LUCKY_DAY].bp_cost = 30;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::QUICK_CHANGE].bp_cost = 0;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::HAMMER_THROW].bp_cost = 2;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PITY_FLOWER].bp_cost = 0;
   return;
 }
 

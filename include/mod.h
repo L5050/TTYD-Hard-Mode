@@ -4,6 +4,7 @@
 
 namespace mod {
 
+EVT_DECLARE(veil_buff)
 EVT_DECLARE(hammer_move)
 EVT_DECLARE(override_hammer_evt)
 EVT_DECLARE(power_bounce)
