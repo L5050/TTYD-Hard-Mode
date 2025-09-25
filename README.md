@@ -64,7 +64,7 @@ This is an open beta of a mod for the original version of Paper Mario: The Thous
 - Both Shadow Queen fights have 400 HP
 
 # How to install
-Go to the [releases page](https://github.com/L5050/TTYD-Hard-Mode/releases) and download the most recent release from there. You will want to take the patcher and input a vanilla TTYD rom (has to be the US version of ttyd), and it'll export a rom that has the mod inside of it. Run that rom in dolphin and you'll be able to play! You can tell if the mod is working if the title screen says "TTYD-Hard-Mode" below the TTYD graphics.
+Go to the [releases page](https://github.com/L5050/TTYD-Hard-Mode/releases) and download the most recent release from there. You will want to take the patcher and input a vanilla TTYD rom (has to be the US version of ttyd), and it'll export a rom that has the mod inside of it. Run that rom in dolphin and you'll be able to play! You can tell if the mod is working if the title screen says "TTYD-Hard-Mode" below the TTYD graphics. Feel free to join the [discord](https://discord.gg/CeXnez2Bj7) if you need more help installing the mod or if you have feedback for me :) 
 
 # Credits
 * [PistonMiner](https://github.com/PistonMiner) for their work on the TTYD scripting disassembly, the initial code for the rel framework, and the elf2rel, gcipack, and rellink utilities. (GitHub repo for these tools [here](https://github.com/PistonMiner/ttyd-tools).)  
