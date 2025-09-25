@@ -136,6 +136,7 @@ static void patchItems()
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::QUICK_CHANGE].bp_cost = 0;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::HAMMER_THROW].bp_cost = 2;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PITY_FLOWER].bp_cost = 0;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::RETURN_POSTAGE].bp_cost = 0;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::CLOSE_CALL].bp_cost = 4;
   return;
 }
