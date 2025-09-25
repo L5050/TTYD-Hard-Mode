@@ -884,6 +884,8 @@ EVT_BEGIN(return_from_shadows)
     END_IF()
     USER_FUNC(btlevtcmd_SetUnitWork, -2, 4, 1)
     USER_FUNC(vivian_buff)
+    //USER_FUNC(evt_snd_bgmoff, 1)
+    //USER_FUNC(evt_snd_bgmon, 1, PTR("BGM_FILE_MENU1"))
     RETURN()
 EVT_END()
 

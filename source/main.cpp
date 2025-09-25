@@ -4,6 +4,7 @@
 #include "gc/os.h"
 #include "gc/OSArena.h"
 #include "ttyd/dispdrv.h"
+#include "ttyd/seqdrv.h"
 #include "ttyd/fontmgr.h"
 #include "ttyd/mariost.h"
 #include "ttyd/battle_damage.h"
@@ -31,7 +32,7 @@ static void drawHelloWorld(dispdrv::CameraId cameraId, void *user)
 
     // Draw the text at the top-left of the screen under the status window
     const char *text = "TTYD-Hard-Mode";
-    drawText(text, -232.f, 120.f, 0.7f, getColorWhite(0xFF));
+    drawText(text, -75.f, 0.f, 0.7f, getColorWhite(0xFF));
 }
 
 // Main function that will run exactly once per frame in the vanilla game's main loop. Set to `static` since it is only used in
@@ -39,7 +40,10 @@ static void drawHelloWorld(dispdrv::CameraId cameraId, void *user)
 static void runOncePerFrame()
 {
     // Register `drawHelloWorld` to run when the vanilla game's drawing functions run
-    drawOnDebugLayer(drawHelloWorld, 0.f);
+    if (seqdrv::seqGetSeq() == seqdrv::SeqIndex::kTitle)
+    {
+      drawOnDebugLayer(drawHelloWorld, 0.f);
+    }
 
     // Finished running all of the desired code, so call the original function to allow the vanilla game to properly progress.
     // Note that this could instead be called first to have the vanilla code run before this project's code, and additioanl code
@@ -52,6 +56,17 @@ static void runOncePerFrame()
 // to apply more optimizations to it.
 static uint32_t initMod()
 {
+      // Initialize text stuff early, so that text can be drawn immediately
+    fontmgr::fontmgrTexSetup();
+
+    // Replace the first instruction in `fontmgrTexSetup` with `blr`, which effectively prevents the function from running later
+    // when it was originally supposed to
+    constexpr uint32_t blrValue = 0x4E800020;
+    applyAssemblyPatch(fontmgr::fontmgrTexSetup, blrValue);
+
+    // This project will just draw some text onto the screen once per frame, so hook `marioStMain` since that runs at the start
+    // of the game's main loop and runs exactly once per frame
+    g_marioStMain_trampoline = hookFunction(ttyd::mariost::marioStMain, runOncePerFrame);
 
     gc::os::OSReport("The Rel Loader has loaded!\n");
     mod::mod_main();

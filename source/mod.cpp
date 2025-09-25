@@ -116,7 +116,7 @@ ttyd::evtmgr::EvtEntry *evtEntryChild_new(ttyd::evtmgr::EvtEntry *parentEvt, voi
   return evtEntryChild_tramp(parentEvt, evtCode, flags);
 }
 
-void patchFunctions()
+static void patchFunctions()
 {
   BattleDamageDirect_tramp = hookFunction(ttyd::battle_damage::BattleDamageDirect, BattleDamageDirect_new);
   BtlUnit_Entry_tramp = hookFunction(ttyd::battle_unit::BtlUnit_Entry, BtlUnit_Entry_new);
@@ -126,16 +126,17 @@ void patchFunctions()
   return;
 }
 
-void patchItems()
+static void patchItems()
 {
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PEEKABOO].bp_cost = 0;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::POWER_RUSH].bp_cost = 3;
-  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::LAST_STAND].bp_cost = 20;
-  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PRETTY_LUCKY].bp_cost = 30;
-  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::LUCKY_DAY].bp_cost = 30;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::LAST_STAND].bp_cost = 3;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PRETTY_LUCKY].bp_cost = 3;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::LUCKY_DAY].bp_cost = 8;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::QUICK_CHANGE].bp_cost = 0;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::HAMMER_THROW].bp_cost = 2;
   ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::PITY_FLOWER].bp_cost = 0;
+  ttyd::item_data::itemDataTable[ttyd::item_data::ItemType::CLOSE_CALL].bp_cost = 4;
   return;
 }
 
