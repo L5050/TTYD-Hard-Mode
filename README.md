@@ -72,5 +72,6 @@ Go to the [releases page](https://github.com/L5050/TTYD-Hard-Mode/releases) and 
 * [SeekyCt](https://github.com/SeekyCt) for their work on **pyelf2rel**, which adds additional functionality over the original **elf2rel**, and their help and support with SPM Hard Mode, which was the inspiration for this mod.
 * [Zephiles](https://github.com/Zephiles) for the mod template this project was based on, and for work on the headers that this project makes use of.
 * [Diagamma](https://git.gauf.re/antoine) for the Melvin patcher which the releases of this mod are embedded in.
+* [Jemaroo](https://github.com/Jemaroo) for the TTYD Magical Map which was used to change the stats of a lot of the enemies and items.
 * [Joby "Jorby" R](https://www.youtube.com/@JobyRJorby) for helping playtest the pre-release builds and helping brainstorm ideas, several of which made it into the mod.
 * [Bringle](https://www.youtube.com/@Bringlescan) for the funny icon used in the patcher.
