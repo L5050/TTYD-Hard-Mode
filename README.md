@@ -73,4 +73,4 @@ Go to the [releases page](https://github.com/L5050/TTYD-Hard-Mode/releases) and 
 * [Zephiles](https://github.com/Zephiles) for the mod template this project was based on, and for work on the headers that this project makes use of.
 * [Diagamma](https://git.gauf.re/antoine) for the Melvin patcher which the releases of this mod are embedded in.
 * [Joby "Jorby" R](https://www.youtube.com/@JobyRJorby) for helping playtest the pre-release builds and helping brainstorm ideas, several of which made it into the mod.
-* [Bringle](https://www.youtube.com/@Bringlescan) for the funny icon used in the patcher
+* [Bringle](https://www.youtube.com/@Bringlescan) for the funny icon used in the patcher.
