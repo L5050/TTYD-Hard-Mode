@@ -4,7 +4,9 @@
 
 namespace mod {
 
-EVT_DECLARE(veil_buff)
+EVT_DECLARE_USER_FUNC(vivian_buff, 0)
+EVT_DECLARE(return_from_shadows)
+EVT_DECLARE(vivian_woosh)
 EVT_DECLARE(hammer_move)
 EVT_DECLARE(override_hammer_evt)
 EVT_DECLARE(power_bounce)

@@ -59,11 +59,11 @@ ttyd::evtmgr::EvtEntry *evtEntry_new(void *evtCode, int32_t executionOrder, uint
     {
         return evtEntry_tramp((void *)override_hammer_evt, executionOrder, flags);
     }
-    if (evtCode == ttyd::unit_party_vivian::partyVivianAttack_ShadowGuard)
+    if (evtCode == ttyd::unit_party_vivian::vivian_hide_event)
     {
         gc::os::OSReport("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
-        //evtEntry_tramp((void *)veil_buff, 1, 0);
-        return evtEntry_tramp(evtCode, executionOrder, flags);
+        return ttyd::evtmgr::evtEntry((void *)return_from_shadows, executionOrder, flags);
+        //return evtEntry_tramp(evtCode, executionOrder, flags);
     }
     return evtEntry_tramp(evtCode, executionOrder, flags);
 }
@@ -93,7 +93,6 @@ int vivian_buff(ttyd::evtmgr::EvtEntry* entry, bool firstRun)
 }
 
 EVT_DECLARE_USER_FUNC(clock_out_hit_mario_func, 0)
-EVT_DECLARE_USER_FUNC(vivian_buff, 0)
 
 EVT_BEGIN(veil_buff)
   USER_FUNC(vivian_buff)
@@ -113,11 +112,6 @@ ttyd::evtmgr::EvtEntry *evtEntryChild_new(ttyd::evtmgr::EvtEntry *parentEvt, voi
   }
     if (evtCode == ttyd::battle_mario::marioAttackEvent_NormalHammer_Core) {
     return evtEntryChild_tramp(parentEvt, (void *)override_hammer_evt, flags);
-  }
-    if (evtCode == ttyd::unit_party_vivian::partyVivianAttack_ShadowGuard) {
-      gc::os::OSReport("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
-      evtEntry_tramp((void *)veil_buff, 1, 0);
-    return evtEntryChild_tramp(parentEvt, (void *)evtCode, flags);
   }
   return evtEntryChild_tramp(parentEvt, evtCode, flags);
 }
